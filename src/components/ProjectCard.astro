@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, tags, image, url, repo } = project.data;
+const href = url ?? repo ?? `/projects#${project.slug}`;
+const isExternal = Boolean(url || repo);
+---
+
+<article class="group flex flex-col overflow-hidden rounded-xl border border-[var(--color-border)] bg-white transition-all hover:border-slate-300 hover:shadow-md">
+  {
+    image && (
+      <div class="aspect-video overflow-hidden bg-[var(--color-surface)]">
+        <img
+          src={image}
+          alt={title}
+          class="h-full w-full object-cover transition-transform group-hover:scale-105"
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+  <div class="flex flex-1 flex-col p-5">
+    <h3 class="text-lg font-semibold text-slate-900">
+      <a
+        href={href}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+        class="hover:text-[var(--color-accent)] transition-colors"
+      >
+        {title}
+      </a>
+    </h3>
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-[var(--color-muted)]">
+      {description}
+    </p>
+    {
+      tags.length > 0 && (
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li class="rounded-full bg-[var(--color-surface)] px-2.5 py-0.5 text-xs text-slate-600">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>

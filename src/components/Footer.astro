@@ -1,0 +1,25 @@
+---
+import { siteConfig } from '../site.config';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+  <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
+    <p class="text-sm text-[var(--color-muted)]">
+      © {year} {siteConfig.author}. 保留所有权利。
+    </p>
+    <nav class="flex gap-6" aria-label="页脚导航">
+      {
+        siteConfig.nav.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm text-[var(--color-muted)] hover:text-slate-900 transition-colors"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</footer>

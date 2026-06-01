@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+
+const socialLinks = [
+  { label: 'GitHub', href: siteConfig.social.github, icon: 'github' },
+  { label: 'LinkedIn', href: siteConfig.social.linkedin, icon: 'linkedin' },
+  { label: 'X (Twitter)', href: siteConfig.social.twitter, icon: 'twitter' },
+].filter((link) => link.href && !link.href.includes('yourusername'));
+---
+
+<BaseLayout title="联系" description="通过邮箱或社交媒体与我取得联系。">
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <header class="mb-12">
+      <h1 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">联系我</h1>
+      <p class="mt-4 text-lg text-[var(--color-muted)]">
+        欢迎通过以下方式与我交流，我会尽快回复。
+      </p>
+    </header>
+
+    <div class="space-y-8">
+      <div class="rounded-xl border border-[var(--color-border)] bg-white p-6">
+        <h2 class="text-sm font-medium uppercase tracking-wider text-[var(--color-muted)]">邮箱</h2>
+        <a
+          href={`mailto:${siteConfig.email}`}
+          class="mt-2 inline-block text-xl font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+        >
+          {siteConfig.email}
+        </a>
+      </div>
+
+      {
+        socialLinks.length > 0 && (
+          <div class="rounded-xl border border-[var(--color-border)] bg-white p-6">
+            <h2 class="text-sm font-medium uppercase tracking-wider text-[var(--color-muted)]">
+              社交媒体
+            </h2>
+            <ul class="mt-4 space-y-3">
+              {socialLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 text-lg font-medium text-slate-900 hover:text-[var(--color-accent)] transition-colors"
+                  >
+                    {link.label}
+                    <span class="text-sm text-[var(--color-muted)]">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      <div class="rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-6 text-center">
+        <p class="text-sm text-[var(--color-muted)]">
+          可将微信二维码图片放在 <code class="rounded bg-white px-1.5 py-0.5 text-xs">public/images/wechat-qr.png</code>，然后在此页面添加展示。
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout title="作品集" description="我的项目与作品展示。">
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <header class="mb-12">
+      <h1 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">作品集</h1>
+      <p class="mt-4 max-w-2xl text-lg text-[var(--color-muted)]">
+        以下是我参与或独立完成的项目，涵盖 Web 开发、工具与实验性作品。
+      </p>
+    </header>
+
+    {
+      projects.length > 0 ? (
+        <div class="grid gap-6 sm:grid-cols-2">
+          {projects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-[var(--color-muted)]">暂无项目，请在 src/content/projects/ 添加内容。</p>
+      )
+    }
+  </section>
+</BaseLayout>
