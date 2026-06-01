@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'tsyyy',
   title: 'tsyyy · 个人网站',
   description: '开发者个人网站，记录项目与思考。',
-  url: 'https://your-site.vercel.app',
+  url: 'https://personaljob-website.vercel.app',
   author: 'tsyyy',
   email: '358171238@qq.com',
   avatar: '/images/avatar.jpg',
