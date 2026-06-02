@@ -54,6 +54,16 @@ npm run preview
 4. 构建命令：`npm run build`，输出目录：`dist`（默认）
 5. 部署完成后，将 `site.config.ts` 与 `astro.config.mjs` 中的域名改为你的 Vercel 域名或自定义域名
 
+## 国内访问（不开 VPN）
+
+`*.vercel.app` 在国内很多地区无法直接打开，**不是代码 bug**。可选：
+
+1. **自定义域名 + Cloudflare 代理 Vercel**（推荐，见详细步骤）
+2. **Cloudflare Pages 双部署**（已含 GitHub Actions，需配置 Secrets）
+3. **Gitee Pages / 国内云静态托管**（国内最稳）
+
+完整说明：[docs/china-access.md](docs/china-access.md)
+
 ## 项目结构
 
 ```
